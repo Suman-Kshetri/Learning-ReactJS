@@ -18,7 +18,7 @@ const Content = () => {
         console.log(`${name} you clicked a button`);
       }
       const handleClick3 = (e) => {
-        console.log(e.target.innerText);
+        console.log(e.target.innerText); 
       }
   return (
     <main>
