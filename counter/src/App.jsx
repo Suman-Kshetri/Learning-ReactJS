@@ -13,8 +13,13 @@ function App() {
     if(counter<20)
     {
     console.log('clicked', counter);
-    counter = counter + 1;
-    setCounter(counter);
+    // setCounter(counter+1);
+    // setCounter(counter+1);
+    // setCounter(counter+1);
+    // setCounter(counter+1);
+    //using above will not work because it will update the value only once and not 4 times since in setCounter function we are passing the value of counter and not the updated value of counter
+    setCounter((prevCounter)=>prevCounter+1);
+    setCounter((counter)=>counter+1);//this wii take the updated value of counter and it will update twice
     }
   }
   const removeValue = () => {
