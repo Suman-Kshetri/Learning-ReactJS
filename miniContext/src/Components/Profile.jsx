@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import userContext from '../Context/UserContext'
-
+//accessing the user from the context 
 function Profile() {
     const {user} = useContext(userContext)
   if(!user) return <div>Please Login</div>;
