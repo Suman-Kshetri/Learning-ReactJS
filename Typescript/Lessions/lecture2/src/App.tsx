@@ -40,13 +40,39 @@ function App() {
 
   const result = useMemo<number>(() => fib(myNum),[myNum])
 
+
+  const [text, setText] = useState<string>('')
+  const [seconds , setSeconds] = useState<number>(0);
+  const render = useRef<number>(0);
+  const timerId = useRef<number>(0);
+
+  const handleChange = (e:any) => {
+    setText(e.target.value);
+    render.current++;
+  }
+
   //useref
-
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  console.log(inputRef?.current);
-  console.log(inputRef?.current?.value);
+  const startTimer = () => {
+    timerId.current = setInterval(() => {
+      render.current++;
+      setSeconds(prev => prev+1);
+    }, 1000);
+  }
+  const stopTimer = () => {
+    clearInterval(timerId.current);
+    timerId.current = 0;
+  }
+  const resetTimer = () => {
+    stopTimer();
+    if(seconds)
+    {
+      render.current ++ ;
+      setSeconds(0)
+    }
+  }
   
+  
+
   
 
 
@@ -56,7 +82,22 @@ function App() {
       <h2>count is {count}</h2>
       <button onClick={addTwo}>Click me</button>
       <h2>{result}</h2>
-      <input type="text"  ref = {inputRef}/>
+      <div>
+      <input 
+      type="text"
+      value={text}
+      onChange={handleChange}
+        />
+      <p>Render: {render.current}</p>
+      <br/><br/>
+      <div className='buttons'>
+      <button onClick={startTimer} >Start</button>
+      <button onClick={stopTimer} >Stop</button>
+      <button onClick={resetTimer} >Reset</button>
+
+      </div>
+      <p>Seconds: {seconds}</p>
+      </div>
     </>
   )
 }
